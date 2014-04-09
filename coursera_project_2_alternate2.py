@@ -19,7 +19,7 @@ def dif_level(player_input):
         exit(1)
 
 
-def max_range_of_game(str):
+def max_range_of_game_f(str):
     """Определяем, какой будет макс рейндж."""
     max_range = str * 100
     return max_range
@@ -36,30 +36,23 @@ def secret_number(str):
 
 
 def reset_end_begin():
-    # global count, secret, max_range_of_game, difficult
-    # count = 0
-    # secret = 0
-    # # del max_range_of_game
-    # # del difficult
     print "Хочешь сыграть еще?"
-
-    print "ОТЛАДКА:\n count = %r \nsecret = %r \nmax_range_of_game = %r \ndifficult = %r" % \
-        (count, secret, max_range_of_game, difficult)
-
-    answer = raw_input("> ")
-    if answer == "Да" or "да" or "yes" or "1" or "Yes":
+    answer = raw_input("yes or no > ")
+    if answer == ("yes" or "Yes"):
         print "Ну давай сыграем еще раз..."
-        intro()
-    else:
+        start()
+    elif answer == ("no" or "No"):
         print "Жаль.. Ну тогда пока.."
         exit(1)
+    else:
+        print "What you say? Yes or No? (You may press Ctrl+D for exit app)"
+        reset_end_begin()
 
 # Экшн
 
-def intro():
+def start():
 
     global difficult, max_range_of_game, count, secret
-
 
     print """
                  Let's play a GAME!
@@ -85,7 +78,7 @@ def intro():
 
     difficult = dif_level(int(raw_input()))
 
-    max_range_of_game = max_range_of_game(difficult)
+    max_range_of_game = max_range_of_game_f(difficult)
 
     print "Играем в диапазоне чисел от 1 до %d" % max_range_of_game
 
@@ -97,15 +90,20 @@ def intro():
 
     secret = secret_number(max_range_of_game)
 
-    print "Ты этого не видел %d" % secret
+    # print "Ты этого не видел %d" % secret
 
     print "Ну, жги. Какое число?"
+
+    try_to_gues()
 
 def try_to_gues():
     global count
     player_try = int(raw_input("> "))
     if player_try == secret and count >= 1:
         print "ВСЁ! НАХРЕН ПОБЕДИЛ ВСЕХ БЛИН!!! ТЮТЮТЮЮЮЮЮ!!!!!"
+        raw_input("RETURN to continue")
+        reset_end_begin()
+
 
     elif player_try > secret and count > 1 :
         count -= 1
@@ -125,5 +123,4 @@ def try_to_gues():
         print "ПИЗДЕЦ! НЕОБРАБОТАННОЕ ИСКЛЮЧЕНИЕ!"
         exit(1)
 
-intro()
-try_to_gues()
+start()
