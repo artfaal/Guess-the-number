@@ -42,7 +42,7 @@ def secret_number(str):
 
 def reset_end_begin():
     print "Wanna play one more time? =)"
-    answer = raw_input("> (Yes, No) >>> ")
+    answer = raw_input("> (yes, no) >>> ")
     if answer == "yes":
         print "Okay... Let's do it again."
         start()
@@ -66,7 +66,7 @@ def start():
 
                   ==          ==
                    ==        ==
-                     ==     ==
+
                     ==       ==
                     ==       ==
                     ==       ==
@@ -92,7 +92,7 @@ def start():
 
     count = num_of_try(max_range_of_game)
 
-    print "n: %d" % count
+    print "Tries: %d" % count
 
     print "Guessing number. Magic..."
 
@@ -109,7 +109,7 @@ def try_to_guess():
     global count
     player_try = int(raw_input("> "))
     if player_try == secret and count >= 1:
-        print "WoW! You Win! It's really %s" & secret
+        print "WoW! You Win! It's really %s" % secret
         raw_input("> Press RETURN to continue")
         reset_end_begin()
 
@@ -124,7 +124,8 @@ def try_to_guess():
         try_to_guess()
 
     elif count <= 1:
-        print "Oh.. You Lose. Maybe in another game you be lucky! =)"
+        print """Oh.. You Lose. Right answer was: %s.
+        Maybe in another game you will be lucky! =)""" % secret
         reset_end_begin()
 
     else:
