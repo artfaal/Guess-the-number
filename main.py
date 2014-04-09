@@ -43,10 +43,10 @@ def secret_number(str):
 def reset_end_begin():
     print "Wanna play one more time? =)"
     answer = raw_input("> (Yes, No) >>> ")
-    if answer == ("yes" or "Yes"):
+    if answer == "yes":
         print "Okay... Let's do it again."
         start()
-    elif answer == ("no" or "No"):
+    elif answer == "no":
         print "Sad.. Good Bye!"
         exit(1)
     else:
@@ -81,8 +81,8 @@ def start():
                       =======
 """
 
-    print """CHoose number in range 1 - 1000.
-    It will be difficult level. (Ex: 1 - easy. 1000 - hard)"""
+    print """Choose number in range 1 - 1000. It will be difficult level.
+    (Ex: 1 - easy. 1000 - hard)"""
 
     difficult = dif_level(int(raw_input()))
 
@@ -109,7 +109,7 @@ def try_to_guess():
     global count
     player_try = int(raw_input("> "))
     if player_try == secret and count >= 1:
-        print "WoW! You Win! It's really %d" & secret
+        print "WoW! You Win! It's really %s" & secret
         raw_input("> Press RETURN to continue")
         reset_end_begin()
 
