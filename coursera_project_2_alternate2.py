@@ -1,54 +1,61 @@
 # -*- coding: utf-8 -*-
-# Давайте попробуем еще раз
+# Python version 2.7 required
 import math
 import random
 
-# Инициализируем Глобальные Переменные
+# Init global variables
 
+# Count tries
 count = 0
+
+# Secren random number for range
 secret = 0
 
-# Обработчики
+
+# Handlers
+
 
 def dif_level(player_input):
-    """Определяем уровень сложности"""
+    """Customizable difficulty"""
     if player_input in range(1, 1001):
         return player_input
     else:
-        print "ERROR! RANGE ONLY 1 - 1001"
+        print "ERROR! RANGE ONLY 1 - 1000"
         exit(1)
 
 
 def max_range_of_game_f(str):
-    """Определяем, какой будет макс рейндж."""
+    """Max range of number"""
     max_range = str * 100
     return max_range
 
 
 def num_of_try(max_range):
-    """Количество попыток"""
+    """Numbers of tries. Player always may win"""
     return int(math.ceil(math.log(max_range, 2)))
 
 
 def secret_number(str):
-    """Загадываем число"""
+    """Create secret number"""
     return int(random.randrange(1, str + 1))
 
 
 def reset_end_begin():
-    print "Хочешь сыграть еще?"
-    answer = raw_input("yes or no > ")
+    print "Wanna play one more time? =)"
+    answer = raw_input("> (Yes, No) >>> ")
     if answer == ("yes" or "Yes"):
-        print "Ну давай сыграем еще раз..."
+        print "Okay... Let's do it again."
         start()
     elif answer == ("no" or "No"):
-        print "Жаль.. Ну тогда пока.."
+        print "Sad.. Good Bye!"
         exit(1)
     else:
         print "What you say? Yes or No? (You may press Ctrl+D for exit app)"
         reset_end_begin()
 
-# Экшн
+
+# Start
+
 
 def start():
 
@@ -74,53 +81,54 @@ def start():
                       =======
 """
 
-    print "Выбери в диапазоне от 1 до 1000. Это задаст сложность игры."
+    print """CHoose number in range 1 - 1000.
+    It will be difficult level. (Ex: 1 - easy. 1000 - hard)"""
 
     difficult = dif_level(int(raw_input()))
 
     max_range_of_game = max_range_of_game_f(difficult)
 
-    print "Играем в диапазоне чисел от 1 до %d" % max_range_of_game
+    print "Play in range from 1 to %d" % max_range_of_game
 
     count = num_of_try(max_range_of_game)
 
-    print "Колчество попыток: %d" % count
+    print "n: %d" % count
 
-    print "Загадываю число........ "
+    print "Guessing number. Magic..."
 
     secret = secret_number(max_range_of_game)
 
     # print "Ты этого не видел %d" % secret
 
-    print "Ну, жги. Какое число?"
+    print "Okay. Let's do it. What's the number in my head?"
 
-    try_to_gues()
+    try_to_guess()
 
-def try_to_gues():
+
+def try_to_guess():
     global count
     player_try = int(raw_input("> "))
     if player_try == secret and count >= 1:
-        print "ВСЁ! НАХРЕН ПОБЕДИЛ ВСЕХ БЛИН!!! ТЮТЮТЮЮЮЮЮ!!!!!"
-        raw_input("RETURN to continue")
+        print "WoW! You Win! It's really %d" & secret
+        raw_input("> Press RETURN to continue")
         reset_end_begin()
 
-
-    elif player_try > secret and count > 1 :
+    elif player_try > secret and count > 1:
         count -= 1
-        print "Загаданное меньше. Осталось %d попыток" % count
-        try_to_gues()
+        print "No. LESS. %d tries left." % count
+        try_to_guess()
 
     elif player_try < secret and count > 1:
         count -= 1
-        print "Загаданное больше. Осталось %d попыток" % count
-        try_to_gues()
+        print "No. GREATER.%d tries left" % count
+        try_to_guess()
 
     elif count <= 1:
-        print "Ну всё, жопень. Проиграл ты, пацанчик."
+        print "Oh.. You Lose. Maybe in another game you be lucky! =)"
         reset_end_begin()
 
     else:
-        print "ПИЗДЕЦ! НЕОБРАБОТАННОЕ ИСКЛЮЧЕНИЕ!"
+        print "OH. IT'S BIG ERROR. SORRY."
         exit(1)
 
 start()
