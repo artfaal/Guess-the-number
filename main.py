@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 # Python version 2.7 required
 import math
 import random
@@ -59,7 +59,10 @@ def reset_end_begin():
 
 def start():
 
-    global difficult, max_range_of_game, count, secret
+    global difficult
+    global max_range_of_game
+    global count
+    global secret
 
     print """
                  Let's play a GAME!
